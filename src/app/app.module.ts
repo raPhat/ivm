@@ -18,11 +18,15 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ModalModule } from 'ngx-bootstrap';
 
 import { ElectronService } from './providers/electron.service';
+import { DatabaseService } from './modules/shared/services/database.service';
 
 import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './stores/auth.reducer';
+import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -49,10 +53,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         TooltipModule.forRoot(),
         ModalModule.forRoot(),
         NgxTransitionModule,
-        AuthModule
+        AuthModule,
+        StoreModule.forRoot({ auth: authReducer }),
+        JasperoAlertsModule
     ],
     providers : [
-        ElectronService
+        ElectronService,
+        DatabaseService
     ],
     bootstrap : [AppComponent]
 })
