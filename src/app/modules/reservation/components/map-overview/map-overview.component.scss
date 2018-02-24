@@ -1,0 +1,122 @@
+.map-overview {
+
+    &-container {
+        width: 100%;
+        padding: 24px;
+
+        .zone {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .building {
+            padding: 6px;
+            height: 60px;
+        }
+
+    }
+
+}
+
+.c {
+
+    &-zone {
+        margin-left: 10%;
+        width: 40%;
+    }
+
+    &-building {
+        width: 25%;
+    }
+
+}
+
+.b {
+
+    &-zone-1 {
+        margin-left: 15%;
+        margin-top: 24px;
+        width: 30%;
+    }
+
+    &-zone-2 {
+        width: 30%;
+    }
+
+    &-building {
+        width: 50%;
+    }
+
+}
+
+.b-a {
+
+    &-zone {
+        margin-left: 20%;
+        margin-top: 24px;
+        width: 60%;
+    }
+
+}
+
+.a {
+
+    &-zone {
+        margin-left: 5%;
+        width: 65%;
+    }
+
+    &-building {
+        width: 25%;
+    }
+
+}
+
+.date-picker {
+
+    &-container {
+        width: 100%;
+        margin-bottom: 36px;
+    }
+
+    &__form {
+        position: relative;
+        display: flex;
+    }
+
+    &__input {
+        position: absolute;
+        left: 0;
+        top: 24px;
+        width: 70%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &__label {
+        width: 70%;
+        padding-right: 24px;
+        text-align: center;
+    }
+
+    &__action {
+        width: 30%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+
+        .btn-group {
+            display: flex;
+            align-items: center;
+
+            label {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__btn {
+        margin: 0 6px;
+    }
+
+}

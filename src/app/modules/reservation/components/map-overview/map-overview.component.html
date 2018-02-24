@@ -1,0 +1,104 @@
+<div class="map-overview-container">
+    <div class="date-picker-container">
+        <form [formGroup]="dateSelected" class="date-picker__form">
+            <div class="date-picker__input">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Datepicker"
+                    #dp="bsDatepicker"
+                    bsDatepicker
+                    formControlName="date"/>
+            </div>
+            <div class="date-picker__label">
+                <div class="alert alert-primary" role="alert">
+                    {{ dateSelected.get('date').value | amDateFormat:'ddd Do MMMM YYYY' }}
+                </div>
+            </div>
+            <div class="date-picker__action">
+                <button class="btn btn-primary date-picker__btn" (click)="setCurrentDate()">Today</button>
+                <button class="btn btn-outline-primary date-picker__btn" (click)="dp.toggle()">Select date</button>
+            </div>
+        </form>
+    </div>
+    <div class="zone c-zone">
+        <!-- 1st row -->
+        <div class="building c-building c-10">
+            <app-building-box [no]="'c10'"></app-building-box>
+        </div>
+        <div class="building c-building c-8">
+            <app-building-box [no]="'c8'"></app-building-box>
+        </div>
+        <div class="building c-building c-4">
+            <app-building-box [no]="'c4'"></app-building-box>
+        </div>
+        <div class="building c-building c-3">
+            <app-building-box [no]="'c3'"></app-building-box>
+        </div>
+
+        <!-- 2nd row -->
+        <div class="building c-building c-9">
+            <app-building-box [no]="'c9'"></app-building-box>
+        </div>
+        <div class="building c-building c-7">
+            <app-building-box [no]="'c7'"></app-building-box>
+        </div>
+        <div class="building c-building c-5">
+            <app-building-box [no]="'c5'"></app-building-box>
+        </div>
+        <div class="building c-building c-2">
+            <app-building-box [no]="'c2'"></app-building-box>
+        </div>
+
+        <!-- 3rd row -->
+        <div class="building c-building c-12">
+            <app-building-box [no]="'c12'"></app-building-box>
+        </div>
+        <div class="building c-building c-11">
+            <app-building-box [no]="'c11'"></app-building-box>
+        </div>
+        <div class="building c-building c-6">
+            <app-building-box [no]="'c6'"></app-building-box>
+        </div>
+        <div class="building c-building c-1">
+            <app-building-box [no]="'c1'"></app-building-box>
+        </div>
+    </div>
+
+    <div class="zone b-zone-1">
+        <div class="building b-building b-4">
+            <app-building-box [no]="'b4'"></app-building-box>
+        </div>
+        <div class="building b-building b-3">
+            <app-building-box [no]="'b3'"></app-building-box>
+        </div>
+    </div>
+
+    <div class="zone b-a-zone">
+
+        <div class="zone b-zone-2">
+            <div class="building b-building b-2">
+                <app-building-box [no]="'b2'"></app-building-box>
+            </div>
+            <div class="building b-building b-1">
+                <app-building-box [no]="'b1'"></app-building-box>
+            </div>
+        </div>
+
+        <div class="zone a-zone">
+            <div class="building a-building a-1">
+                <app-building-box [no]="'a1'"></app-building-box>
+            </div>
+            <div class="building a-building a-2">
+                <app-building-box [no]="'a2'"></app-building-box>
+            </div>
+            <div class="building a-building a-3">
+                <app-building-box [no]="'a3'"></app-building-box>
+            </div>
+            <div class="building a-building a-4">
+                <app-building-box [no]="'a4'"></app-building-box>
+            </div>
+        </div>
+
+    </div>
+</div>

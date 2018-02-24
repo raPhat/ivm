@@ -1,0 +1,68 @@
+@import '../../../../../styles/variables';
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.map {
+
+    &-container {
+        width: 100%;
+        padding: 24px 0;
+    }
+
+}
+
+.guide {
+
+    &-alert {
+        width: 100%;
+        margin: 0 24px;
+    }
+
+    &-container {
+        width: 100%;
+        // padding: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background-color: rgba($white-color, .9);
+
+        .mark-guide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 24px;
+            span {
+                text-transform: uppercase;
+                text-shadow: 0 0 5px $white-color;
+            }
+        }
+
+        .mark {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+
+            &.available {
+                background-color: $green-color;
+            }
+
+            &.reserved {
+                background-color: $yellow-color;
+            }
+
+            &.unavailable {
+                background-color: $red-color;
+            }
+
+        }
+
+    }
+
+}

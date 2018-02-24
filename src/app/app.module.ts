@@ -8,10 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { NgxTransitionModule } from 'ngx-transition';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BsDatepickerModule, TooltipModule } from 'ngx-bootstrap';
+import { AuthModule } from './modules/auth/auth.module';
+import { ModalModule } from 'ngx-bootstrap';
 
 import { ElectronService } from './providers/electron.service';
 
@@ -26,25 +30,30 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    WebviewDirective
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (HttpLoaderFactory),
-        deps: [HttpClient]
-      }
-    })
-  ],
-  providers: [ElectronService],
-  bootstrap: [AppComponent]
+    declarations : [
+        AppComponent, HomeComponent, WebviewDirective
+    ],
+    imports : [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (HttpLoaderFactory),
+                deps: [HttpClient]
+            }
+        }),
+        BsDatepickerModule.forRoot(),
+        TooltipModule.forRoot(),
+        ModalModule.forRoot(),
+        NgxTransitionModule,
+        AuthModule
+    ],
+    providers : [
+        ElectronService
+    ],
+    bootstrap : [AppComponent]
 })
 export class AppModule { }

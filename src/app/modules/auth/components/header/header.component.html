@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">IVM</a>
+    <div class="navbar-menu">
+        <a class="nav-item nav-link" [routerLink]="['/auth/login']">login</a>
+        <a class="nav-item nav-link" href="#" (click)="openChangePassword($event, template)">Change password</a>
+        <a class="nav-item nav-link" href="#">Log Out</a>
+    </div>
+</nav>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Change password</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="passwordForm">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="New password"
+                formControlName="password"/>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save change</button>
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+    </div>
+</ng-template>

@@ -1,7 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'styles/variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+@import 'styles/custom';
+
 html, body {
   margin: 0;
   padding: 0;
 
   height: 100%;
+  overflow-x: hidden;
+
+  background-image: url('./assets/img/footer.png');
+  background-position: bottom center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
 }
