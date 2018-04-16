@@ -1,0 +1,56 @@
+<div class="reserve-card" [ngClass]="{
+    reserved: ReserveType.reserved === result.status,
+    unavailable: ReserveType.unavailable === result.status
+}">
+    <div class="reserve-card__icon reserved" *ngIf="ReserveType.reserved === result.status">
+        <i class="fas fa-pause-circle"></i>
+    </div>
+    <div class="reserve-card__icon unavailable" *ngIf="ReserveType.unavailable === result.status">
+        <i class="fas fa-stop-circle"></i>
+    </div>
+    <div class="reserve-card__content">
+        <div class="reserve-card__content__line">
+            <span class="type">{{ ReserveType[result.status] }}</span>
+        </div>
+        <div class="reserve-card__content__line reserve-card__content__name">
+            <!-- <span class="title">TYPE: </span> -->
+            <div class="reserve-card__content__name--left">
+                <span class="title">NAME: </span>
+                <span class="text" [tooltip]="result?.reserve.name">{{ result?.reserve.name }}</span>
+            </div>
+            <div class="reserve-card__content__name--right">
+                <span class="title">TYPE: </span>
+                <span class="text" [tooltip]="result?.reserve.companyType">{{ result?.reserve.companyType }}</span>
+            </div>
+            <div class="reserve-card__content__name--single">
+                <span class="title">NOTE: </span>
+                <span class="text" [innerHTML]="result?.reserve.note"></span>
+            </div>
+        </div>
+        <div class="reserve-card__content__line reserve-card__content__ranges">
+            <div class="reserve-card__content__range">{{ beginDate }}</div>
+            <div class="reserve-card__content__between"> <div class="fas fa-angle-double-right"></div> </div>
+            <div class="reserve-card__content__range">{{ endDate }}</div>
+        </div>
+    </div>
+    <div class="reserve-card__actions">
+        <button class="reserve-card__action reserve-card__action--edit" (click)="openEditReserveDialog($event, result.reserve)">
+            <div class="icon"><i class="fas fa-edit"></i></div>
+            <div class="label">EDIT</div>
+        </button>
+        <ng-template #confirmTemplate>
+            <button class="btn btn-danger reserve-card__action--confirm" (click)="removeReserve(result.reserve)">
+                    <i class="fas fa-check-circle"></i> &nbsp; CONFIRM
+            </button>
+        </ng-template>
+        <button class="reserve-card__action reserve-card__action--delete" [class.opened]="isOpen"
+            [popover]="confirmTemplate"
+            placement="left"
+            [outsideClick]="true"
+            (onHidden)="isOpen = false"
+            (onShown)="isOpen = true">
+                <div class="icon"><i class="fas fa-trash"></i></div>
+                <div class="label">DELETE</div>
+        </button>
+    </div>
+</div>

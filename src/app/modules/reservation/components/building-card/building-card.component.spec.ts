@@ -1,3 +1,4 @@
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuildingCardComponent } from './building-card.component';
@@ -8,7 +9,10 @@ describe('BuildingCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BuildingCardComponent ]
+      declarations: [ BuildingCardComponent ],
+      imports: [
+        BsDatepickerModule
+      ]
     })
     .compileComponents();
   }));

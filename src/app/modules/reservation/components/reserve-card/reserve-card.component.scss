@@ -1,0 +1,186 @@
+@import '../../../../../styles/variables';
+
+.reserve-card {
+    position: relative;
+    margin-right: -24px;
+    margin-left: -24px;
+    // margin-bottom: 12px;
+    border-top: 2px solid $gray-light-color;
+    border-bottom: 2px solid $gray-light-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    display: flex;
+    background-color: $white-color;
+    border-left: 10px solid;
+
+    &.reserved {
+        border-left-color: $yellow-color;
+        .type {
+            color: $yellow-color;
+        }
+    }
+
+    &.unavailable {
+        border-left-color: $red-color;
+        .type {
+            color: $red-color;
+        }
+    }
+
+    .type {
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+
+    &__icon {
+        width: 48px;
+        height: 48px;
+        position: absolute;
+        // top: calc(50% - 24px);
+        top: 0;
+        left: -26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: $white-color;
+        border-radius: 100%;
+        &.reserved {
+            background-color: $yellow-color;
+        }
+        &.unavailable {
+            background-color: $red-color;
+        }
+    }
+
+    &__content {
+        width: calc(100% - 74px);
+        height: auto;
+        &__line {
+            width: 100%;
+            min-height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 16px;
+            padding-right: 12px;
+            .title {
+                margin-right: 6px;
+                font-size: 10px;
+                font-weight: bold;
+                color: $gray-color;
+            }
+            .text {
+                font-weight: bold;
+                ::ng-deep p {
+                    margin-bottom: 0;
+                }
+            }
+            &:first-child {
+                min-height: 48px;
+                padding-left: 36px;
+                justify-content: flex-start;
+            }
+        }
+        &__name {
+            flex-wrap: wrap;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            &--left {
+                width: 50%;
+                text-align: left;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            &--right {
+                width: 50%;
+                text-align: right;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            &--single {
+                width: 100%;
+                .text {
+                    font-weight: normal;
+                }
+            }
+        }
+        &__ranges {
+            display: flex;
+            align-items: center;
+        }
+        &__range {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: rgba($gray-light-color, .25);
+            border-radius: 15px;
+        }
+        &__between {
+            padding: 0 12px;
+        }
+    }
+
+    &__actions {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 48px;
+
+        ::ng-deep .popover {
+            border: none;
+            border-radius: 0;
+            background-color: $red-color;
+        }
+
+        ::ng-deep .arrow {
+            &::before {
+                display: none;
+            }
+            &::after {
+                right: 2px;
+                border-left-color: $red-color;
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        width: 156px;
+        height: 50%;
+        position: relative;
+        right: 12px;
+        padding: 0 12px 0 24px;
+        border: none;
+        // border-radius: 30px 0 0 30px;
+        outline: none;
+        cursor: pointer;
+        transition: all .6s;
+        // border-left: 12px solid rgba($black-color, 0.2);
+        &:hover, &.opened {
+            right: 108px;
+        }
+        .label {
+            padding-left: 24px;
+        }
+        &--confirm {
+            font-weight: bold;
+        }
+        &--edit {
+            background-color: $gray-light-color;
+        }
+        &--delete {
+            color: $white-color;
+            background-color: $red-color;
+        }
+    }
+
+}

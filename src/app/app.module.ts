@@ -1,3 +1,4 @@
+import { MomentService } from './modules/shared/services/moment.service';
 import 'zone.js/dist/zone-mix';
 import 'reflect-metadata';
 import '../polyfills';
@@ -23,10 +24,11 @@ import { DatabaseService } from './modules/shared/services/database.service';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './stores/auth.reducer';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
+import { settingReducer } from './stores/setting.reducer';
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
     declarations : [
-        AppComponent, HomeComponent, WebviewDirective
+        AppComponent, WebviewDirective
     ],
     imports : [
         BrowserModule,
@@ -54,12 +56,17 @@ export function HttpLoaderFactory(http: HttpClient) {
         ModalModule.forRoot(),
         NgxTransitionModule,
         AuthModule,
-        StoreModule.forRoot({ auth: authReducer }),
-        JasperoAlertsModule
+        StoreModule.forRoot({
+            auth: authReducer,
+            setting: settingReducer
+        }),
+        JasperoAlertsModule,
+        NgxMyDatePickerModule.forRoot()
     ],
     providers : [
         ElectronService,
-        DatabaseService
+        DatabaseService,
+        MomentService
     ],
     bootstrap : [AppComponent]
 })

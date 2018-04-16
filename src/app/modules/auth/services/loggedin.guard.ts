@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 export class LoggedinGuard implements CanActivate {
 
     constructor(
-        private authService: AuthService
+        public authService: AuthService
     ) {}
 
     canActivate(

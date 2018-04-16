@@ -1,7 +1,9 @@
+import { AppState } from './../../../../stores/app.state';
+import { SETTING_END, SETTING_UP } from './../../../../stores/setting.reducer';
 import { Router } from '@angular/router';
-import { LOGIN, LOGOUT } from './../../../../stores/auth.reducer';
+import { LOGOUT_SUCCESS } from './../../../../stores/auth.reducer';
 import { DatabaseService } from './../../../shared/services/database.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
@@ -13,7 +15,9 @@ import { AlertsService } from '@jaspero/ng2-alerts';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
+
+    @ViewChild('settingsTemplate') settingsTemplate;
 
     modalRef: BsModalRef;
     passwordForm: FormGroup;
@@ -22,32 +26,43 @@ export class HeaderComponent implements OnInit {
     isLoggedIn = false;
 
     constructor(
-        private modalService: BsModalService,
+        public modalService: BsModalService,
         private formBuilder: FormBuilder,
-        private databaseService: DatabaseService,
-        private authService: AuthService,
-        private store: Store<AppState>,
-        private router: Router,
-        private alert: AlertsService
+        public databaseService: DatabaseService,
+        public authService: AuthService,
+        public store: Store<AppState>,
+        public router: Router,
+        public alert: AlertsService
     ) {}
 
     ngOnInit() {
         this.isLoggedIn = this.authService.isLoggedIn;
-        this.store.select('auth').subscribe((action) => {
-            if (action) {
-                this.isLoggedIn = (action === LOGIN);
-            }
-        });
         this.passwordForm = this.formBuilder.group({
             password: ''
         });
         this.getDatabasePath();
     }
 
+    ngAfterViewInit() {
+        if (this.isLoggedIn) {
+            this.settingFirst();
+        }
+    }
+
+    settingFirst() {
+        if (!this.databaseExist) {
+            this.openDialog(null, this.settingsTemplate, {
+                ignoreBackdropClick: true
+            });
+        } else {
+            this.store.dispatch({ type: SETTING_END });
+        }
+    }
+
     logout(e) {
         e.preventDefault();
         this.authService.logout();
-        this.store.dispatch({ type: LOGOUT });
+        this.store.dispatch({ type: LOGOUT_SUCCESS });
         this.router.navigate(['auth/login']);
     }
 
@@ -63,9 +78,11 @@ export class HeaderComponent implements OnInit {
         this.databaseExist = !!this.databasePath;
     }
 
-    openDialog(e: Event, template) {
-        e.preventDefault();
-        this.modalRef = this.modalService.show(template);
+    openDialog(e: Event, template, config) {
+        if (e) {
+            e.preventDefault();
+        }
+        this.modalRef = this.modalService.show(template, config);
     }
 
     updateDatabasePath(e: Event) {
@@ -73,7 +90,6 @@ export class HeaderComponent implements OnInit {
         const file = target.files && target.files.length ? target.files[0] : null;
         if (file) {
             this.databasePath = file.path;
-            console.log(this.databasePath);
         }
     }
 
@@ -81,6 +97,7 @@ export class HeaderComponent implements OnInit {
         if (this.databasePath) {
             this.databaseService.setDatabasePath(this.databasePath);
             this.getDatabasePath();
+            this.store.dispatch({ type: SETTING_END });
         }
     }
 

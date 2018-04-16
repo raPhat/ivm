@@ -7,8 +7,8 @@ import { AuthService } from './auth.service';
 export class GuestGuard implements CanActivate {
 
     constructor(
-        private authService: AuthService,
-        private router: Router
+        public authService: AuthService,
+        public router: Router
     ) {}
 
     canActivate(

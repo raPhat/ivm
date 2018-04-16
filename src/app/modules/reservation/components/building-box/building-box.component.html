@@ -1,4 +1,8 @@
-<div class="building-box" [ngClass]="[status]" [tooltip]="no">
-    <div class="mark"></div>
+<div class="building-box" [ngClass]="results.statusList" [tooltip]="no" (click)="open()">
+    <div class="mark-list">
+        <div *ngIf="results.statusList.available" class="mark available"></div>
+        <div *ngIf="results.statusList.reserved" class="mark reserved"></div>
+        <div *ngIf="results.statusList.unavailable" class="mark unavailable"></div>
+    </div>
     <span>{{ no }}</span>
 </div>

@@ -1,3 +1,4 @@
+import { BuildingPageComponent } from './pages/building-page/building-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,6 +10,10 @@ const routes: Routes = [
     {
         path: 'overview',
         component: OverviewPageComponent
+    },
+    {
+        path: 'building/:no',
+        component: BuildingPageComponent
     },
     {
         path: '',

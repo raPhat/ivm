@@ -6,6 +6,7 @@ export class AuthService {
     get isLoggedIn() {
         return !!sessionStorage.getItem('loggedin');
     }
+
     private defaultPassword = 'password';
 
     constructor() { }

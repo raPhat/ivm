@@ -1,5 +1,4 @@
 import { GuestGuard } from './modules/auth/services/guest.guard';
-import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoggedinGuard } from './modules/auth/services/loggedin.guard';
@@ -16,10 +15,7 @@ const routes: Routes = [
     loadChildren: 'app/modules/auth/auth.module#AuthModule',
   },
   { path: '',   redirectTo: 'auth/login', pathMatch: 'full' },
-  {
-    path: '**',
-    component: HomeComponent
-  }
+  { path: '**',   redirectTo: 'auth/login', pathMatch: 'full' },
 ];
 
 @NgModule({
