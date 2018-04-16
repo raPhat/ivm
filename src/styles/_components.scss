@@ -1,0 +1,54 @@
+.card-state {
+    $c: &;
+    padding: 24px;
+    width: 100%;
+    min-height: 120px;
+    display: flex;
+    background-color: $light-color;
+    border-radius: 6px;
+
+    &.primary {
+        background-color: $blue-color;
+        #{$c}__icon {
+            color: $white-color;
+        }
+        #{$c}__content__value {
+            color: $white-color;
+        }
+        #{$c}__content__title {
+            color: $white-color;
+        }
+    }
+
+    &__icon {
+        width: 36px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    &__content {
+        width: calc(100% - 60px);
+        height: 100%;
+        padding: 0 12px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        &__value {
+            width: 100%;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 40px;
+            text-transform: uppercase;
+        }
+        &__title {
+            font-size: 10px;
+            opacity: .5;
+            text-transform: uppercase;
+        }
+    }
+
+}

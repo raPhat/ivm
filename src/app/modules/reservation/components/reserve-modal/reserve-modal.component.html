@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left"><span>{{ no }}</span>: Reserve</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label>Name</label>
+            <input
+            type="text"
+            class="form-control"
+            formControlName="name"/>
+            <small *ngIf="form.get('name').invalid" class="form-text text-muted">please, input name.</small>
+        </div>
+        <div class="form-group">
+            <label>Note</label>
+            <quill-editor formControlName="note" [modules]="options"></quill-editor>
+            <small *ngIf="form.get('note').invalid" class="form-text text-muted">please, input something.</small>
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <input
+            type="text"
+            class="form-control"
+            formControlName="companyType"/>
+            <small *ngIf="form.get('companyType').invalid" class="form-text text-muted">please, input something.</small>
+        </div>
+    </form>
+    <div class="calendar-range">
+        <div class="range-label">
+            <my-date-range-picker
+                name="mydaterange"
+                [options]="myDateRangePickerOptions"
+                [(ngModel)]="model"
+                (dateRangeChanged)="onDateRangeChanged($event)"
+                required>
+            </my-date-range-picker>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="submit()">{{ mode === 'new' ? 'Reserve' : 'Save' }}</button>
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+</div>

@@ -1,5 +1,5 @@
 {
-  "productName": "angular-electron",
+  "productName": "IVM",
   "directories": {
     "app": "dist",
     "output": "app-builds"

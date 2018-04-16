@@ -1,0 +1,39 @@
+@import '../../../../../styles/variables';
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    background: white;
+    border-bottom: 2px solid #DDD;
+    // box-shadow: 0 0 25px rgba(#000, .1);
+    z-index: 99;
+
+    &-brand {
+        width: 100px;
+        margin-right: 0;
+        text-align: center;
+    }
+
+    &-menu {
+        width: calc(100% - 100px);
+        display: flex;
+        justify-content: flex-end;
+
+        .nav-link {
+            padding: 1rem 1rem;
+        }
+
+    }
+
+    .fa-calendar-alt {
+        margin-right: 6px;
+        color: $blue-color;
+    }
+
+}
+
+.path-input {
+    width: 100%;
+}

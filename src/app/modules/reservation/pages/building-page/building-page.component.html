@@ -1,0 +1,155 @@
+<div class="dashboard__container">
+
+    <div class="dashboard__loading" *ngIf="rightLoading || leftLoading">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+    </div>
+
+    <div class="dashboard__left">
+        <div class="dashboard__states">
+            <div class="card-state primary">
+                <div class="card-state__icon">
+                    <div class="fas fa-key"></div>
+                </div>
+                <div class="card-state__content">
+                    <div class="card-state__content__value">
+                        {{ no }}
+                    </div>
+                    <div class="card-state__content__title">
+                        number
+                    </div>
+                </div>
+            </div>
+            <div class="card-state">
+                <div class="card-state__icon">
+                    <div class="fas fa-boxes"></div>
+                </div>
+                <div class="card-state__content">
+                    <div class="card-state__content__value">
+                        {{ allReserved.length }}
+                    </div>
+                    <div class="card-state__content__title">
+                        reserved
+                    </div>
+                </div>
+            </div>
+            <div class="card-state">
+                <div class="card-state__icon">
+                    <div class="fas fa-braille"></div>
+                </div>
+                <div class="card-state__content">
+                    <div class="card-state__content__value">
+                        {{ data.length }}
+                    </div>
+                    <div class="card-state__content__title">
+                        categories
+                    </div>
+                </div>
+            </div>
+            <div class="card-state">
+                <div class="card-state__icon">
+                    <div class="fas fa-comments"></div>
+                </div>
+                <div class="card-state__content">
+                    <div class="card-state__content__value">
+                        {{ allComments.length }}
+                    </div>
+                    <div class="card-state__content__title">
+                        comments
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="dashboard__chart" *ngIf="allReserved.length > 0">
+            <ngx-charts-pie-chart
+                #chart
+                [results]="data"
+                [legend]="true"
+                [labels]="true">
+            </ngx-charts-pie-chart>
+        </div>
+        <div class="dashboard__comments__container">
+            <div class="dashboard__comments__box">
+                <div [formGroup]="commentForm" class="dashboard__comments__box__editor">
+                    <quill-editor placeholder="comment..." formControlName="content" [modules]="options"></quill-editor>
+                </div>
+                <button [disabled]="commentForm.invalid" (click)="comment()" class="dashboard__comments__box__button btn btn-success btn-block">
+                    <i class="fas fa-share-square"></i> COMMENT
+                </button>
+            </div>
+            <hr>
+            <div class="dashboard__comments">
+                <div class="dashboard__comment" *ngFor="let comment of allComments">
+                    <app-comment-card [comment]="comment" (updated)="getAllComments()"></app-comment-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard__right">
+        <div class="calendar-range">
+            <div class="range-label">
+                <my-date-range-picker
+                    name="mydaterange"
+                    [options]="myDateRangePickerOptions"
+                    [(ngModel)]="model"
+                    (dateRangeChanged)="onDateRangeChanged($event)"
+                    required>
+                </my-date-range-picker>
+            </div>
+        </div>
+
+        <div  *ngFor="let result of results.results" class="user-card">
+            <app-reserve-card
+                [result]="result"
+                [no]="no"
+                [dateSelected]="dateSelected"
+                (updated)="onUpdated()">
+            </app-reserve-card>
+        </div>
+
+        <div *ngIf="results.statusList.available || status === ''" class="reserve-btn">
+            <button
+                class="btn btn-success btn-lg btn-block"
+                [disabled]="!dateSelected?.beginEpoc || !dateSelected?.beginEpoc"
+                (click)="openReserveDialog($event)">
+                    Reserve
+            </button>
+            <small *ngIf="!dateSelected?.beginEpoc || !dateSelected?.beginEpoc" class="form-text text-muted text-center">Please select date</small>
+        </div>
+    </div>
+
+<!--
+
+    <div class="info-card card">
+        <div class="card-header">Building Information</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-5 col-sm-3">
+                    <div class="card-img"></div>
+                </div>
+                <div class="info-card__content col-7 col-9">
+                    <h5 class="card-title">{{ building?.name }}</h5>
+                    <p class="card-text">{{ building?.description }}</p>
+                </div>
+            </div>
+            <hr *ngIf="results.statusList.available || status === ''">
+            <div *ngIf="results.statusList.available || status === ''" class="reserve-btn">
+                <button
+                    class="btn btn-success btn-lg btn-block"
+                    [disabled]="!dateSelected?.beginEpoc || !dateSelected?.beginEpoc"
+                    (click)="openReserveDialog($event)">
+                        Reserve
+                </button>
+                <small *ngIf="!dateSelected?.beginEpoc || !dateSelected?.beginEpoc" class="form-text text-muted text-center">Please select date</small>
+            </div>
+        </div>
+    </div>
+-->
+
+</div>

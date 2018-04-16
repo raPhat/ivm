@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#"> <i class="fas fa-calendar-alt"></i><strong>IVM</strong></a>
+    <div class="navbar-menu">
+        <a class="nav-item nav-link" [routerLink]="['reservation/overview']">Overview</a>
+        <a class="nav-item nav-link" href="#" (click)="openDialog($event, settingsTemplate)">Settings</a>
+        <a class="nav-item nav-link" href="#" (click)="openDialog($event, changePasswordTemplate)">Change password</a>
+        <a class="nav-item nav-link" href="#" (click)="logout($event)">Log Out</a>
+    </div>
+</nav>
+
+<ng-template #changePasswordTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Change password</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="passwordForm">
+            <input
+                type="password"
+                class="form-control"
+                placeholder="New password"
+                formControlName="password"/>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="passwordForm.pristine" (click)="updateNewPassword()">Save change</button>
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #settingsTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Settings</h4>
+        <button *ngIf="databaseExist" type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-warning" *ngIf="!databaseExist">
+            Database path does not exist.
+        </div>
+        <div class="alert alert-info" *ngIf="databaseExist">
+            <strong>Current path:</strong> {{ databasePath }}/db.json
+        </div>
+        <input type="file" class="path-input" (change)="updateDatabasePath($event)" webkitdirectory directory multiple/>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="!databasePath" (click)="saveDatabasePath()">Save change</button>
+        <button type="button" class="btn btn-secondary" [disabled]="!databaseExist" (click)="modalRef.hide()">Close</button>
+    </div>
+</ng-template>

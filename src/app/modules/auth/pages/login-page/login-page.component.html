@@ -1,0 +1,12 @@
+<div class="container">
+
+    <div class="login-container">
+        <form class="login-form" [formGroup]="passwordForm" (submit)="onSubmit($event)">
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </form>
+    </div>
+
+</div>

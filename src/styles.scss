@@ -1,7 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'styles/variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import "../node_modules/quill/dist/quill.bubble.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+@import 'styles/custom';
+@import 'styles/components';
+@import 'assets/css/fontawesome-all.css';
+
 html, body {
   margin: 0;
   padding: 0;
 
   height: 100%;
+  overflow-x: hidden;
+
+//   background-image: url('./assets/img/footer.png');
+//   background-position: bottom center;
+//   background-size: 100% auto;
+//   background-repeat: no-repeat;
+}
+
+.map {
+    width: 100%;
+    padding-top: 48.226%;
+    background-image: url('./assets/img/map.jpg');
+    background-size: 100% auto;
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
 }
